@@ -18,15 +18,21 @@ export default class extends Base {
       let pwd = this.post('pwd');
       let user = this.model('user').where({name: name}).find().then(
           (obj) => {
-            //console.log(obj.id+ ", " + obj.name + ", " + obj.pwd);
             if( pwd == obj.pwd){
               console.log("success");
-              return obj.success=1;
+              this.session('loginuser',obj);
+              this.success(obj);
             }else {
               console.log("error");
-              return obj.errno=0;
+              this.error(obj);
             }
-          }).catch(console.log('User does`t exist!'));
+          });//.catch((error) => { console.log(error.message+ '???')})
     }
+  }
+  * afterloginAction(){
+    let data = yield this.session('loginuser');
+    console.log(data);
+    //this.assign('username',data);
+    return this.display("login");
   }
 }
