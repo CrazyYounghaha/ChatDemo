@@ -1,41 +1,6 @@
 <% include header.html %>
-<!--<header>-->
-    <!--&lt;!&ndash;<div class="wrap">&ndash;&gt;-->
-        <!--&lt;!&ndash;<h3 style="color: white;">A New App Created By ThinkJS <%= title %> </h3>&ndash;&gt;-->
-    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-    <!-- -->
-<!--</header>-->=
 <body>
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a href="" class="navbar-brand logo"><img src="/static/img/niit.jpg" alt="NIIT education"></a>
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <div class="collapse navbar-collapse" id="navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-list"></span> Course</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-fire"></span> Exam</a></li>
-                <li><a href="#"><spand class="glyphicon glyphicon-question-sign"></spand> About us</a></li>
-                <li><a data-toggle="modal" data-target="#myModal">Login</a><span class="glyphicon glyphicon-user"></span> Login</a></li>
-                <li><a data-toggle="modal" data-target="#myModal">Register</a><span class="glyphicon glyphicon-plus-sign"></span> Register</a></li>
-                <li class="dropdown" id="nowUser" style="display: none;">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <span class="glyphicon glyphicon-user"></span><span id="username">UserName</span><span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="" style="text-align: center">Personal</a></li>
-                        <li><a href="" style="text-align: center" id="logout">Log out</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<% include topbar.html %>
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form role="form" id="login" method="post">
@@ -187,13 +152,7 @@
         </div>
     </div>
 </div>
-
-<footer id="footer">
-    <div class="container">
-        <p>Training | Cooperation | Comments</p>
-        <p>© 2016 Train Lab. </p>
-    </div>
-</footer>
+<% include footer.html %>
 <script>
     $(function(){
         $('#validate-submit').click(function (){
@@ -204,7 +163,7 @@
                 data: data,
                 success: function(msg){
                     if(msg.data.id){
-                        window.location.href="/index/afterlogin";
+                        location.reload(true);
 //                        redirect('index_login.html');
 //                        alert("Successful!");
                     }else {
@@ -220,23 +179,7 @@
     });
     //轮播自动播放
     $('#myCarousel').carousel({
-        interval : 4000,
-    });
-    //设置文字垂直居中，谷歌浏览器加载图片的顺序问题，导致高度无法获取
-    $(window).load(function () {
-        $('.text').eq(0).css('margin-top', ($('.auto').eq(0).height() - $('.text').eq(0).height()) / 2 + 'px');
-    });
-
-    $(window).resize(function () {
-        $('.text').eq(0).css('margin-top', ($('.auto').eq(0).height() - $('.text').eq(0).height()) / 2 + 'px');
-    });
-
-    $(window).load(function () {
-        $('.text').eq(1).css('margin-top', ($('.auto').eq(1).height() - $('.text').eq(1).height()) / 2 + 'px');
-    });
-
-    $(window).resize(function () {
-        $('.text').eq(1).css('margin-top', ($('.auto').eq(1).height() - $('.text').eq(1).height()) / 2 + 'px');
+        interval : 4000
     });
 </script>
 </body>

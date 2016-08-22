@@ -4,14 +4,19 @@ export default class extends think.controller.base {
   /**
    * some base method in here
    */
-  // indexAction(){
-  //  yield this.session("userInfo", data);
-  //  let value = yield this.session("userInfo");
-  //  console.log(value);
-  //}
-  listAction(){
-    //let model = this.model("user");
-    //let data = yield model.where({name: "admin"}).find();
-    //data returns {name: "thinkjs", email: "admin@thinkjs.org", ...}
+  init(http) {
+    super.init(http);
+  }
+
+  async __before() {
+    this.islogin = await this.is_login();
+    this.user = await this.session('loginuser');
+  }
+
+  async is_login() {
+    //前台判断是否登录
+    let user = await this.session('loginuser');
+    let res = think.isEmpty(user) ? false : user;
+    return res;
   }
 }

@@ -29,10 +29,17 @@ export default class extends Base {
           });//.catch((error) => { console.log(error.message+ '???')})
     }
   }
+  * logoutAction(){
+    if(this.islogin){
+      yield this.session('loginuser',null);
+      console.log("1");
+      return this.redirect('index');
+    }
+  }
   * afterloginAction(){
     let data = yield this.session('loginuser');
-    console.log(data);
-    //this.assign('username',data);
+    //console.log(data);
+    this.assign('username',data);
     return this.display("login");
   }
 }
