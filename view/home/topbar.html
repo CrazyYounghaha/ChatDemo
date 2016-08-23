@@ -1,8 +1,14 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a href="" class="navbar-brand logo">
-                <img src="/static/img/niit.jpg" class="logo" alt="NIIT education"></a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="" class="logo">
+                <img src="/static/img/niit.jpg"  alt="NIIT education">
+            </a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -13,7 +19,8 @@
                 <% if (controller.islogin) { %>
                 <li><a>您好, <%- controller.user.name -%></a></li>
                 <li>
-                    <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#"><i class="fa fa-user hidden-xs"></i> 会员中心</a>
+                    <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#"><i
+                            class="fa fa-user hidden-xs"></i> 会员中心</a>
                     <ul class="dropdown-menu pull-right">
                         <li><a tabindex="-1" href=""><i class="fa fa-bank"></i>我的中心</a></li>
                         <li class="divider"></li>
@@ -25,17 +32,10 @@
                         <li><a tabindex="-1" href="/index/logout"><i class="fa fa-sign-out"></i> 退出登录</a></li>
                     </ul>
                 </li>
-                <!--&lt;!&ndash;<li class="dropdown" id="nowUser">&ndash;&gt;-->
-                <!--&lt;!&ndash;<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">&ndash;&gt;-->
-                <!--&lt;!&ndash;<span class="glyphicon glyphicon-user"></span><span id="username">UserName</span><span class="caret"></span></a>&ndash;&gt;-->
-                <!--&lt;!&ndash;<ul class="dropdown-menu">&ndash;&gt;-->
-                <!--&lt;!&ndash;<li><a href="" style="text-align: center">Personal</a></li>&ndash;&gt;-->
-                <!--&lt;!&ndash;<li><a href="" style="text-align: center" id="logout">Log out</a></li>&ndash;&gt;-->
-                <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-                <!--&lt;!&ndash;</li>&ndash;&gt;-->
                 <% } else {%>
-                <li><a data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-user"></span>Login</a></li>
-                <li><a data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus-sign"></span>Register</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-user"></span>Login</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#registerModal"><span class="glyphicon glyphicon-plus-sign"></span>Register</a>
+                </li>
                 <% } %>
             </ul>
         </div>

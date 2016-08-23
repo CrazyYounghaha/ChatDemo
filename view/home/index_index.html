@@ -1,42 +1,12 @@
 <% include header.html %>
 <body>
 <% include topbar.html %>
-<!-- 模态框（Modal） -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form role="form" id="login" method="post">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        用户登录
-                    </h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>账号</label>
-                        <input type="text" name="name" class="form-control" placeholder="email/phone/nickname" required="">
-                    </div>
-                    <div class="form-group">
-                        <label>密码</label>
-                        <input type="password" name="pwd" class="form-control" placeholder="password" required="">
-                        <div class="clearfix note">
-                            <a href="#" class="pull-right">Forget Password?</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <!--<button type="button" class="btn btn-default"-->
-                    <!--data-dismiss="modal">关闭-->
-                    <!--</button>-->
-                    <button id="validate-submit" type="button" class="btn btn-primary">登录</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-    </form>
-    <!-- /.modal -->
-</div>
+
+<!--Login Modal-->
+<% include loginModal.html %>
+<!--Register Modal-->
+<% include registerModal.html %>
+
 <div id="myCarousel" class="carousel slide">
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -86,7 +56,7 @@
             <div class="col-md-6 col">
                 <div class="media">
                     <div class="media-left">
-                        <a href="#"><img src="" class="media-object" alt="2"></a>
+                        <a href="#"><img src="/static/img/tab1-2.png" class="media-object" alt="2"></a>
                     </div>
                     <div class="media-body">
                         <h4 class="media-heading">Teacher</h4>
@@ -98,7 +68,7 @@
             <div class="col-md-6 col">
                 <div class="media">
                     <div class="media-left">
-                        <a href="#"><img src="" class="media-object" alt="3"></a>
+                        <a href="#"><img src="/static/img/tab1-3.png" class="media-object" alt="3"></a>
                     </div>
                     <div class="media-body">
                         <h4 class="media-heading">Arrangement</h4>
@@ -110,7 +80,7 @@
             <div class="col-md-6 col">
                 <div class="media">
                     <div class="media-left">
-                        <a href="#"><img src="" class="media-object" alt="4"></a>
+                        <a href="#"><img src="/static/img/tab1-4.png" class="media-object" alt="4"></a>
                     </div>
                     <div class="media-body">
                         <h4 class="media-heading">Team work</h4>
@@ -128,7 +98,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-6 tab2-img">
-                <img src="" class="auto img-responsive center-block" alt="12">
+                <img src="/static/img/tab2.png" class="auto img-responsive center-block" alt="12">
             </div>
             <div class="text col-md-6 col-sm-6 tab2-text">
                 <h3>Stronger manage system</h3>
@@ -143,7 +113,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-6">
-                <img src="" class="auto img-responsive center-block" alt="13">
+                <img src="/static/img/tab3.png" class="auto img-responsive center-block" alt="13">
             </div>
             <div class="text col-md-6 col-sm-6">
                 <h3>Perfect skills</h3>
@@ -155,24 +125,34 @@
 <% include footer.html %>
 <script>
     $(function(){
-        $('#validate-submit').click(function (){
+        $('#login-submit').click(function (){
             var data = $('#login').serialize();
             $.ajax({
                 url: "/index/login",
                 type: "post",
                 data: data,
                 success: function(msg){
-                    if(msg.data.id){
-                        location.reload(true);
-//                        redirect('index_login.html');
-//                        alert("Successful!");
-                    }else {
-//                        redirect('index_error.html');
+                    console.log(msg);
+                    if(msg.err){
                         alert("Error!");
+                    }else {
+//                        location.reload(true);
                     }
                 },
-                error: function(error){
-                    console.log(error + " ajax return error!");
+                error: function(msg){
+                    console.log(msg);
+                }
+            })
+        });
+        $('#register-submit').click(function(){
+            var data = $('#register').serialize();
+            $.ajax({
+                type: "post",
+                url: "/index/register",
+                data: data,
+                success: function(msg){
+                    console.log(msg);
+                    location.reload(true);
                 }
             })
         });
