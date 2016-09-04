@@ -122,7 +122,6 @@
         </div>
     </div>
 </div>
-<% include footer.html %>
 <script>
     $(function(){
         $('#login-submit').click(function (){
@@ -133,16 +132,20 @@
                 data: data,
                 success: function(msg){
                     console.log(msg);
-                    if(msg.err){
-                        alert("Error!");
-                    }else {
-//                        location.reload(true);
+                    switch (msg.data){
+                        case 1:
+                            location.reload(true);
+                            break;
+                        case -1:
+                            alert("User not exist!");
+                            break;
+                        case -2:
+                            alert("password not correct!");
+                            break;
                     }
-                },
-                error: function(msg){
-                    console.log(msg);
+//                    location.reload(true);
                 }
-            })
+            });
         });
         $('#register-submit').click(function(){
             var data = $('#register').serialize();
@@ -152,7 +155,24 @@
                 data: data,
                 success: function(msg){
                     console.log(msg);
-                    location.reload(true);
+                    switch(msg.data){
+                        case 1:
+                            location.reload(true);
+                            break;
+                        case -1:
+                            alert("用户昵称不能为空！");
+                            break;
+                        case -2:
+                            alert("用户昵称已存在，请重新填写！");
+                            break;
+                        case -3:
+                            alert("密码不能为空！");
+                            break;
+                        case -4:
+                            alert("两次输入的密码不一致，请重新填写！");
+                            break;
+                    }
+//                    location.reload(true);
                 }
             })
         });
@@ -162,5 +182,5 @@
         interval : 4000
     });
 </script>
-</body>
-</html>
+<!--footer-->
+<% include footer.html %>

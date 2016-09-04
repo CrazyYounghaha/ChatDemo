@@ -9,25 +9,32 @@ export default class extends Base {
 		 */
 		indexAction() {
 				//auto render template file index_index.html
-				this.assign("title", "ThinkJs 官网");
+				this.assign("title", "Training Lab 官网");
 				return this.display();
 		}
 
 		* loginAction() {
 				if (this.isPost()) {
-						let name = this.post('name');
-						let pwd = this.post('pwd');
-						pwd = encryptPassword(pwd);
-						let user = yield this.model('user').where({name: name}).find();
-
-						if (pwd == user.pwd) {
-								console.log("Login success");
-								yield this.session('loginuser', user);
-								return this.success(user);
+						let data = this.post();
+						data.pwd = encryptPassword(data.pwd);
+						data.login_time = new Date().valueOf();
+						let user = yield this.model('user').where({name: data.name}).find();
+						if (think.isEmpty(user)) {
+								return this.success(-1);
 						} else {
-								console.log("error");
-								user.err = 1;
-								return this.success(user);
+								if (data.pwd == user.pwd) {
+										console.log("Login success");
+										let userInfo = {
+												'id': user.id,
+												'username': data.name,
+												'last_login_time': data.login_time
+										};
+										yield this.session('loginuser', userInfo);
+										return this.success(1);
+								} else {
+										console.log("password error");
+										return this.success(-2);
+								}
 						}
 				}
 		}
@@ -37,18 +44,18 @@ export default class extends Base {
 						let data = this.post();
 						console.log(data);
 						if (think.isEmpty(data.r_name)) {
-								return this.fail("用户昵称不能为空！");
+								return this.success(-1);//"用户昵称不能为空！"
 						} else {
 								let res = yield this.model("user").where({name: ltrim(data.r_name)}).find();
 								if (!think.isEmpty(res)) {
-										return this.fail("用户昵称已存在，请重新填写！")
+										return this.success(-2);//"用户昵称已存在，请重新填写！"
 								}
 						}
 						if (think.isEmpty(data.r_pwd) && think.isEmpty(data.pwdConfirm)) {
-								return this.fail("密码不能为空！")
+								return this.success(-3);//"密码不能为空！"
 						} else {
 								if (data.r_pwd != data.pwdConfirm) {
-										return this.fail("两次输入的密码不一致，请重新填写！")
+										return this.success(-4);//"两次输入的密码不一致，请重新填写！"
 								}
 						}
 						data.reg_time = new Date().valueOf();
@@ -60,7 +67,7 @@ export default class extends Base {
 								'last_login_time': data.reg_time
 						};
 						yield this.session('loginuser', userInfo);
-						return this.success({name: "注册成功！登录中", url: "/index"});
+						return this.success(1);
 				} else {
 						return this.display();
 				}
@@ -71,6 +78,13 @@ export default class extends Base {
 						yield this.session('loginuser', null);
 						return this.redirect('index');
 				}
+		}
+
+		userAction() {
+				this.assign("title","Personal Page");
+				//this.assign("last_login_time",dateformat('Y-m-d H:i:s', this.user.last_login_time));
+				//console.log(dateformat('Y-m-d H:i:s', this.user.last_login_time));
+				return this.display();
 		}
 
 }
