@@ -10,8 +10,10 @@ export default class extends Base {
 		 * index action
 		 * @return {Promise} []
 		 */
-		indexAction(){
+		* indexAction(){
+				yield this.weblogin();
 				this.assign("title", "个人主页");
+				this.assign("userInfo",this.user);
 				return this.display();
 		}
 }
