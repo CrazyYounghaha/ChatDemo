@@ -18,11 +18,11 @@ export default class extends Base {
 						let data = this.post();
 						data.pwd = encryptPassword(data.pwd);
 						data.login_time = new Date().valueOf();
-						let user = yield this.model('user').where({name: data.name}).find();
+						let user = yield this.model('user').where({username: data.name}).find();
 						if (think.isEmpty(user)) {
 								return this.success(-1);
 						} else {
-								if (data.pwd == user.pwd) {
+								if (data.pwd == user.password) {
 										console.log("Login success");
 										let userInfo = {
 												'id': user.id,
@@ -46,7 +46,7 @@ export default class extends Base {
 						if (think.isEmpty(data.r_name)) {
 								return this.success(-1);//"用户昵称不能为空！"
 						} else {
-								let res = yield this.model("user").where({name: ltrim(data.r_name)}).find();
+								let res = yield this.model("user").where({username: ltrim(data.r_name)}).find();
 								if (!think.isEmpty(res)) {
 										return this.success(-2);//"用户昵称已存在，请重新填写！"
 								}
@@ -60,7 +60,8 @@ export default class extends Base {
 						}
 						data.reg_time = new Date().valueOf();
 						data.r_pwd = encryptPassword(data.r_pwd);
-						let reg = yield this.model("user").add({name: data.r_name, pwd: data.r_pwd});
+						let email = data.r_name + "@qq.com";
+						let reg = yield this.model("user").add({username: data.r_name, password: data.r_pwd, email: email});
 						let userInfo = {
 								'id': reg,
 								'username': data.r_name,

@@ -17,6 +17,7 @@ export default class extends think.controller.base {
 				//前台判断是否登录
 				let user = await this.session('loginuser');
 				let res = think.isEmpty(user) ? false : user;
+				//console.log(res);
 				return res;
 		}
 

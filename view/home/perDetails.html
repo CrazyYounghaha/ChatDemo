@@ -21,13 +21,13 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label">邮箱</label>
                     <div class="col-md-4">
-                        <input type="email" placeholder="email" class="form-control" name="email" value="{{userInfo.email}}">
+                        <input type="email" placeholder="email" class="form-control" name="email" value="<%- userInfo.email %>">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">真实姓名</label>
                     <div class="col-md-4">
-                        <input type="text" placeholder="真实姓名" class="form-control" name="real_name" value="{{userInfo.real_name}}">
+                        <input type="text" placeholder="真实姓名" class="form-control" name="real_name" value="<%- userInfo.real_name %>">
                     </div>
                 </div>
                 <div class="form-group">
@@ -35,11 +35,13 @@
                     <div class="col-md-10">
 
                         <label class="radio" style="margin-top: 3px;padding-top: 3px">
-                            <input type="radio" value="1" name="sex" <% if (userInfo.sex == 1) { checked="checked" } %> >
+                            <input type="radio" value="1" name="sex" <% if (userInfo.sex == 1) {%>
+                            checked="checked"
+                            <% } %> >
                             <i></i> 男
                         </label>
                         <label class="radio" style="margin-top: 3px;padding-top: 3px">
-                            <input type="radio" {%if userInfo.sex == 2 %} checked="checked"{%endif%} value="2" name="sex">
+                            <input type="radio" <%if (userInfo.sex == 2) { %> checked="checked" <% } %> value="2" name="sex">
                             <i></i> 女
                         </label>
                     </div>
@@ -47,18 +49,18 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label">生日</label>
                     <div class="col-md-4">
-                        <input type="text" name="birthday" value="{{userInfo.birthday|dateformat('Y-m-d')}}" class="form-control masked" data-format="9999-99-99" data-placeholder="_" placeholder="年-月-日">
+                        <input type="text" name="birthday" value="<%- userInfo.birthday|dateformat('Y-m-d') %>" class="form-control masked" data-format="9999-99-99" data-placeholder="_" placeholder="年-月-日">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">手机号码</label>
                     <div class="col-md-4">
-                        <input type="text" name="mobile" value="{{userInfo.mobile}}" class="form-control masked" data-format="99999999999" data-placeholder="X" placeholder="手机号码">
+                        <input type="text" name="mobile" value="<%- userInfo.mobile%>" class="form-control masked" data-format="99999999999" data-placeholder="X" placeholder="手机号码">
                     </div></div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">电话号码</label>
                     <div class="col-md-4">
-                        <input type="text" name="phone" value="{{userInfo.phone}}" placeholder="电话号码" class="form-control">
+                        <input type="text" name="phone" value="<%- userInfo.phone%>" placeholder="电话号码" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
@@ -66,30 +68,34 @@
                     <div class="col-md-10">
                         <select class="form-control pointer  " id="province1" name="province" style="width: 150px;display: inline-block">
                             <option value="">--- 省份/直辖市 ---</option>
-                            {% for val in province %}
-                            <option value="{{val.id}}" {% if userInfo.province == val.id %} selected {% endif%}>{{val.name}}</option>
-                            {% endfor %}
+                            <% province.forEach (function(val) { %>
+                            <%# console.log(val) %>
+                            <option value="<%- val.id%>"
+                            <% if (userInfo.province == val.id) { %> selected  <% } %> > <%- val.name %></option>
+                            <% }) %>
                         </select>
                         <select class="form-control pointer  " id="city1" name="city" style="width: 150px;display: inline-block">
-                            {% for val in city %}
-                            <option value="{{val.id}}" {% if userInfo.city == val.id %} selected {% endif%}>{{val.name}}</option>
-                            {% else %}
                             <option value="">--- 市 ---</option>
-                            {% endfor %}
+                            <% city.forEach (function(val) { %>
+                            <%# console.log(val) %>
+                            <option value="<%- val.id%>"
+                            <% if (userInfo.city == val.id) { %> selected  <% } %> > <%- val.name %></option>
+                            <% }) %>
                         </select>
                         <select class="form-control pointer " id="county1" name="county" style="width: 150px;display: inline-block">
-                            {% for val in county %}
-                            <option value="{{val.id}}" {% if userInfo.county == val.id %} selected {% endif%}>{{val.name}}</option>
-                            {% else %}
                             <option value="">--- 县/区 ---</option>
-                            {% endfor %}
+                            <% county.forEach (function(val) { %>
+                            <%# console.log(val) %>
+                            <option value="<%- val.id%>"
+                            <% if (userInfo.county == val.id) { %> selected  <% } %> > <%- val.name %></option>
+                            <% }) %>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">街道地址</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" name="addr"  placeholder="不需要重复填写省市区，必须大于5个字符，小于120个字符">{{userInfo.addr}}</textarea>
+                        <textarea class="form-control" name="addr"  placeholder="不需要重复填写省市区，必须大于5个字符，小于120个字符"><%- userInfo.addr %></textarea>
                     </div>
                 </div>
 
