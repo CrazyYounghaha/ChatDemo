@@ -1,0 +1,35 @@
+<% include header.html %>
+<!--top bar -->
+<% include topbar.html %>
+<!--menu-->
+<% include confirmBorrow.html %>
+<!--user content-->
+<section class="page-header page-header-xs">
+    <div class="container">
+        <!-- breadcrumbs -->
+        <ol class="breadcrumb breadcrumb-inverse">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">用户</a></li>
+            <li class="active">个人信息</li>
+        </ol>
+        <!-- /breadcrumbs -->
+
+    </div>
+</section>
+<!-- /PAGE HEADER -->
+
+
+<!-- -->
+<section>
+    <div class="container">
+        <div class="row">
+            <!-- LEFT -->
+            <% include user_left.html %>
+            <!-- RIGHT -->
+            <% include bookStore.html %>
+        </div>
+    </div>
+</section>
+<!--user content end-->
+<!--footer-->
+<% include footer.html %>

@@ -11,7 +11,7 @@
 
         <!-- PERSONAL INFO TAB -->
         <div class="tab-pane fade in active" id="info">
-            <form role="form" action="/index/updateinfo" method="post" class="form-horizontal form-info">
+            <form role="form" action="/member/updateinfo" method="post" class="form-horizontal form-info">
                 <div class="form-group">
                     <label class="col-md-2 control-label">会员账号</label>
                     <div class="col-md-10">
@@ -69,7 +69,6 @@
                         <select class="form-control pointer  " id="province1" name="province" style="width: 150px;display: inline-block">
                             <option value="">--- 省份/直辖市 ---</option>
                             <% province.forEach (function(val) { %>
-                            <%# console.log(val) %>
                             <option value="<%- val.id%>"
                             <% if (userInfo.province == val.id) { %> selected  <% } %> > <%- val.name %></option>
                             <% }) %>
@@ -77,7 +76,6 @@
                         <select class="form-control pointer  " id="city1" name="city" style="width: 150px;display: inline-block">
                             <option value="">--- 市 ---</option>
                             <% city.forEach (function(val) { %>
-                            <%# console.log(val) %>
                             <option value="<%- val.id%>"
                             <% if (userInfo.city == val.id) { %> selected  <% } %> > <%- val.name %></option>
                             <% }) %>
@@ -85,7 +83,6 @@
                         <select class="form-control pointer " id="county1" name="county" style="width: 150px;display: inline-block">
                             <option value="">--- 县/区 ---</option>
                             <% county.forEach (function(val) { %>
-                            <%# console.log(val) %>
                             <option value="<%- val.id%>"
                             <% if (userInfo.county == val.id) { %> selected  <% } %> > <%- val.name %></option>
                             <% }) %>
@@ -265,3 +262,41 @@
     </div>
 
 </div>
+
+<script>
+
+    //编辑
+    $(document).on("change", "#province1", function (e) {
+        var pid = $("#province1 option:selected").val();
+        $.ajax({
+            url: "/member/getarea",
+            data: {"pid": pid},
+            success: function (msg) {
+                var province_arr = ['<option value="">--- 市 ---</option>'];
+                $.each(msg, function name(k, v) {
+                    province_arr.push('<option value="' + v.id + '">' + v.name + '</option>')
+                });
+                province_html = province_arr.join("");
+                $("#city1").html(province_html);
+                $("#county1").html('<option value="">--- 县/区 ---</option>');
+            }
+        });
+    });
+
+
+    $(document).on("change", "#city1", function (e) {
+        var pid = $("#city1 option:selected").val();
+        $.ajax({
+            url: "/member/getarea",
+            data: {"pid": pid},
+            success: function (msg) {
+                var province_arr = ['<option value="">--- 县/区 ---</option>'];
+                $.each(msg, function name(k, v) {
+                    province_arr.push('<option value="' + v.id + '">' + v.name + '</option>')
+                });
+                province_html = province_arr.join("");
+                $("#county1").html(province_html);
+            }
+        });
+    });
+</script>

@@ -10,13 +10,24 @@
                     </h4>
                 </div>
                 <div class="modal-body">
+                    <!--<div class="form-control">-->
+                    <div>
+                        <label> Type </label>
+                        <select class="form-control" name="memberType">
+                            <option>student</option>
+                            <option>professor</option>
+                        </select>
+                    </div>
+                    <!--</div>-->
                     <div class="form-group">
                         <label>账号</label>
-                        <input type="text" name="name" class="form-control" placeholder="email/phone/nickname" required="">
+                        <input type="text" name="name" class="form-control" placeholder="email/phone/nickname"
+                               required="">
                     </div>
                     <div class="form-group">
                         <label>密码</label>
                         <input type="password" name="pwd" class="form-control" placeholder="password" required="">
+
                         <div class="clearfix note">
                             <a href="#" class="pull-right">Forget Password?</a>
                         </div>

@@ -1,0 +1,151 @@
+<div class="content">
+    <h1 class="h1_book_title">Book Store</h1>
+    <ul>
+        <!--<li>-->
+        <!--<dl>-->
+        <!--<dd><a href="#"><img src="/static/img/books/book_01.jpg" alt="book" /></a></dd>-->
+        <!--<dt>-->
+        <!--<p class="book_title">Gift cards</a></p>-->
+        <!--<p class="book_inline">$25, $50, and $100</p>-->
+        <!--<a class="book_buy" href="#" target="_blank">BUY</a>-->
+        <!--</dt>-->
+        <!--</dl>-->
+        <!--</li>-->
+        <li>
+            <dl>
+                <dd><a href="#"><img src="/static/img/books/book_02.jpg" alt="book"/></a></dd>
+                <dt>
+                <p class="book_title">Just Enough Research</p>
+
+                <p class="book_inline"> Erika Hall</p>
+                <a class="book_buy" href="#" data-toggle="modal" data-target="#confirmBorrow">BORROW</a>
+                </dt>
+            </dl>
+        </li>
+        <li>
+            <dl>
+                <dd><a href="#"><img src="/static/img/books/book_03.jpg" alt="book"/></a></dd>
+                <dt>
+                <p class="book_title">Content Strategy for Mobile</p>
+
+                <p class="book_inline"> Karen McGrane</p>
+                <a class="book_buy" href="#" data-toggle="modal" data-target="#confirmBorrow">BORROW</a>
+                </dt>
+            </dl>
+        </li>
+        <li>
+            <dl>
+                <dd><a href="#"><img src="/static/img/books/book_04.jpg" alt="book"/></a></dd>
+                <dt>
+                <p class="book_title">Design Is a Job</p>
+
+                <p class="book_inline"> Mike Monteiro</p>
+                <a class="book_buy" href="#" data-toggle="modal" data-target="#confirmBorrow">BORROW</a>
+                </dt>
+            </dl>
+        </li>
+        <li>
+            <dl>
+                <dd><a href="#"><img src="/static/img/books/book_05.jpg" alt="book"/></a></dd>
+                <dt>
+                <p class="book_title">Mobile First</p>
+
+                <p class="book_inline"> Luke Wroblewski</p>
+                <a class="book_buy" href="#" data-toggle="modal" data-target="#confirmBorrow">BORROW</a>
+                </dt>
+            </dl>
+        </li>
+        <li>
+            <dl>
+                <dd><a href="#"><img src="/static/img/books/book_06.jpg" alt="book"/></a></dd>
+                <dt>
+                <p class="book_title">Designing for Emotion</p>
+
+                <p class="book_inline"> Aarron Walter</p>
+                <a class="book_buy" href="#" data-toggle="modal" data-target="#confirmBorrow">BORROW</a>
+                </dt>
+            </dl>
+        </li>
+        <li>
+            <dl>
+                <dd><a href="#"><img src="/static/img/books/book_07.jpg" alt="book"/></a></dd>
+                <dt>
+                <p class="book_title">Responsive Web Design</p>
+
+                <p class="book_inline"> Ethan Marcotte</p>
+                <a class="book_buy" href="#" data-toggle="modal" data-target="#confirmBorrow">BORROW</a>
+                </dt>
+            </dl>
+        </li>
+        <li>
+            <dl>
+                <dd><a href="#"><img src="/static/img/books/book_08.jpg" alt="book"/></a></dd>
+                <dt>
+                <p class="book_title">CSS3 for Web Designers</p>
+
+                <p class="book_inline"> Dan Cederholm</p>
+                <a class="book_buy" href="#" data-toggle="modal" data-target="#confirmBorrow">BORROW</a>
+                </dt>
+            </dl>
+        </li>
+        <li>
+            <dl>
+                <dd><a href="#"><img src="/static/img/books/book_09.jpg" alt="book"/></a></dd>
+                <dt>
+                <p class="book_title">HTML5 for Web Designers</p>
+
+                <p class="book_inline"> Jeremy Keith</p>
+                <a class="book_buy" href="#" data-toggle="modal" data-target="#confirmBorrow">BORROW</a>
+                </dt>
+            </dl>
+        </li>
+        <li>
+            <dl>
+                <dd><a href="#"><img src="/static/img/books/book_10.jpg" alt="book"/></a></dd>
+                <dt>
+                <p class="book_title">On Web Typography</p>
+
+                <p class="book_inline"> Jason Santa Maria</p>
+                <a class="book_buy" href="#" data-toggle="modal" data-target="#confirmBorrow">BORROW</a>
+                </dt>
+            </dl>
+        </li>
+        <li>
+            <dl>
+                <dd><a href="#"><img src="/static/img/books/book_11.jpg" alt="book"/></a></dd>
+                <dt>
+                <p class="book_title">Responsible Responsive Design</p>
+
+                <p class="book_inline"> Scott Jehl</p>
+                <a class="book_buy" href="#" data-toggle="modal" data-target="#confirmBorrow">BORROW</a>
+                </dt>
+            </dl>
+        </li>
+        <li>
+            <dl>
+                <dd><a href="#"><img src="/static/img/books/book_12.jpg" alt="book"/></a></dd>
+                <dt>
+                <p class="book_title">On Web Typography</p>
+
+                <p class="book_inline"> Jason Santa Maria</p>
+                <a class="book_buy" href="#" data-toggle="modal" data-target="#confirmBorrow">BORROW</a>
+                </dt>
+            </dl>
+        </li>
+    </ul>
+</div>
+
+<script>
+    $('.book_buy').click(function () {
+        let data = $(this).siblings("p").html();
+//        console.log(data);
+        $.ajax({
+            type: "post",
+            url: "/index/borrow",
+            data: {Title: data},
+            success: function(msg){
+                console.log(msg);
+            }
+        })
+    });
+</script>
